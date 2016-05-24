@@ -23,6 +23,8 @@
 % y refers to the profit in $10,000s
 %
 
+cc;
+
 %% Initialization
 clear ; close all; clc
 
