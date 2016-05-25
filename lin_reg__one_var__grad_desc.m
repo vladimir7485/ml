@@ -5,25 +5,30 @@
 cc;
 
 %% Generate training data
-x = 0:19;
-k = 0.7;
-b = 1.5;
-m = 20;
+% x = 0:19;
+% k = 0.7;
+% b = 1.5;
+% m = 20;
+% 
+% y = k.*x + b;
 
-y = k.*x + b;
+% figure(); plot(x,y,'-r'); hold on;
 
-figure(); plot(x,y,'-r'); hold on;
-
-noise = normrnd(4, 4, 1, 20) - 2;
-noisy_y = y + noise;
-plot(x,noisy_y,'*b');
+% noise = normrnd(4, 4, 1, 20) - 2;
+% noisy_y = y + noise;
+% plot(x,noisy_y,'*b');
 
 % Training set
-y = noisy_y;
+% y = noisy_y;
 
 % x = [1, 2, 4, 0];
 % y = [0.5, 1, 2, 0];
 % m = 4;
+
+data = load('machine-learning-ex1\ex1\ex1data1.txt');
+x = data(:,1);
+y = data(:,2);
+m = size(x,1);
 
 figure(); plot(x,y,'*b'); hold on;
 
@@ -37,7 +42,7 @@ mse = @(h, y)(sum((h-y).^2) / (2*m));
 th0 = 2;
 th1 = -2;
 thresh = 0.01;
-alpha = 0.002;
+alpha = 0.01;
 
 %% Gradient descent method
 i = 0;

@@ -37,6 +37,9 @@ fprintf('Loading data ...\n');
 data = load('ex1data2.txt');
 X = data(:, 1:2);
 y = data(:, 3);
+% data = load('ex1data1.txt');
+% X = data(:,1);
+% y = data(:,2);
 m = length(y);
 
 % Print out some data points
@@ -83,11 +86,13 @@ fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
 alpha = 0.01;
-num_iters = 400;
+num_iters = 1000;
 
 % Init Theta and Run Gradient Descent 
 theta = zeros(3, 1);
-[theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+% theta = zeros(2, 1);
+% [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+[theta, J_history] = gradientDescent(X, y, theta, alpha, num_iters);
 
 % Plot the convergence graph
 figure;
@@ -106,6 +111,10 @@ fprintf('\n');
 % not need to be normalized.
 price = 0; % You should change this
 
+Xi = [1650, 3];
+Xi = (Xi - mu) ./ sigma;
+Xi = [1, Xi];
+price = theta'*Xi';
 
 % ============================================================
 
@@ -134,7 +143,7 @@ data = csvread('ex1data2.txt');
 X = data(:, 1:2);
 y = data(:, 3);
 m = length(y);
-
+% [X mu sigma] = featureNormalize(X); % just to make sure
 % Add intercept term to X
 X = [ones(m, 1) X];
 
@@ -151,6 +160,10 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 price = 0; % You should change this
 
+Xi = [1650, 3];
+% Xi = (Xi - mu) ./ sigma;
+Xi = [1, Xi];
+price = theta'*Xi';
 
 % ============================================================
 
