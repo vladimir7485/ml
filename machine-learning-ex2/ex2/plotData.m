@@ -12,17 +12,11 @@ figure; hold on;
 %               examples and 'ko' for the negative examples.
 %
 
-
-
-
-
-
-
-
+X1 = X(:,1); X2 = X(:,2);
+plot(X1(y==1), X2(y==1), '+b');
+plot(X1(y==0), X2(y==0), 'or');
 
 % =========================================================================
-
-
 
 hold off;
 

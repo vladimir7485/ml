@@ -28,6 +28,7 @@ sigma = zeros(1, size(X, 2));
 
 mu = mean(X,1);
 sigma = std(X);
+% sigma = max(X);
 X_norm = (X_norm - repmat(mu, [size(X_norm,1), 1])) ./ repmat(sigma, [size(X_norm,1), 1]);
 
 

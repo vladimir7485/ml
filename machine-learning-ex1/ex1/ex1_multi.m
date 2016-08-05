@@ -34,9 +34,10 @@ clear ; close all; clc
 fprintf('Loading data ...\n');
 
 %% Load Data
-data = load('ex1data2.txt');
-X = data(:, 1:2);
-y = data(:, 3);
+n = 2; % number of features
+data = load('ex1data3.txt');
+X = data(:, 1:n);
+y = data(:, end);
 % data = load('ex1data1.txt');
 % X = data(:,1);
 % y = data(:,2);
@@ -44,10 +45,10 @@ m = length(y);
 
 % Print out some data points
 fprintf('First 10 examples from the dataset: \n');
-fprintf(' x = [%.0f %.0f], y = %.0f \n', [X(1:10,:) y(1:10,:)]');
+fprintf(' x = [%8.2f %6.2f], y = %6.2f \n', [X(1:10,:) y(1:10,:)]');
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+% pause;
 
 % Scale features and set them to zero mean
 fprintf('Normalizing Features ...\n');
@@ -85,12 +86,12 @@ X = [ones(m, 1) X];
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
-alpha = 0.01;
-num_iters = 1000;
+alpha = 0.0001;
+num_iters = 10000;
 
 % Init Theta and Run Gradient Descent 
-theta = zeros(3, 1);
-% theta = zeros(2, 1);
+theta = zeros(n+1, 1);
+
 % [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
 [theta, J_history] = gradientDescent(X, y, theta, alpha, num_iters);
 
@@ -105,24 +106,24 @@ fprintf('Theta computed from gradient descent: \n');
 fprintf(' %f \n', theta);
 fprintf('\n');
 
-% Estimate the price of a 1650 sq-ft, 3 br house
-% ====================== YOUR CODE HERE ======================
-% Recall that the first column of X is all-ones. Thus, it does
-% not need to be normalized.
-price = 0; % You should change this
-
-Xi = [1650, 3];
-Xi = (Xi - mu) ./ sigma;
-Xi = [1, Xi];
-price = theta'*Xi';
-
-% ============================================================
-
-fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
-         '(using gradient descent):\n $%f\n'], price);
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+% % Estimate the price of a 1650 sq-ft, 3 br house
+% % ====================== YOUR CODE HERE ======================
+% % Recall that the first column of X is all-ones. Thus, it does
+% % not need to be normalized.
+% price = 0; % You should change this
+% 
+% Xi = [1650, 3];
+% Xi = (Xi - mu) ./ sigma;
+% Xi = [1, Xi];
+% price = theta'*Xi';
+% 
+% % ============================================================
+% 
+% fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
+%          '(using gradient descent):\n $%f\n'], price);
+% 
+% fprintf('Program paused. Press enter to continue.\n');
+% pause;
 
 %% ================ Part 3: Normal Equations ================
 
@@ -139,9 +140,10 @@ fprintf('Solving with normal equations...\n');
 %
 
 %% Load Data
-data = csvread('ex1data2.txt');
-X = data(:, 1:2);
-y = data(:, 3);
+n = 2;
+data = csvread('ex1data3.txt');
+X = data(:, 1:n);
+y = data(:, end);
 m = length(y);
 % [X mu sigma] = featureNormalize(X); % just to make sure
 % Add intercept term to X
@@ -158,15 +160,15 @@ fprintf('\n');
 
 % Estimate the price of a 1650 sq-ft, 3 br house
 % ====================== YOUR CODE HERE ======================
-price = 0; % You should change this
+% price = 0; % You should change this
 
-Xi = [1650, 3];
+% Xi = [42665, 6.47257];
 % Xi = (Xi - mu) ./ sigma;
-Xi = [1, Xi];
-price = theta'*Xi';
+% Xi = [1, Xi];
+price = (theta'*X')';
 
 % ============================================================
 
-fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
-         '(using normal equations):\n $%f\n'], price);
+% fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
+%          '(using normal equations):\n $%f\n'], price);
 
