@@ -19,7 +19,7 @@ grad = zeros(size(theta));
 
 J = -1/m * sum(y  .*  log(sigmoid(theta' * X'))'  +  ...
               (ones([size(y,1),1]) - y)  .*  log(ones([1,size(y,1)]) - sigmoid(theta' * X'))'    , 1)  +  ...
-              lambda/(2*m) * sum(theta.^2, 1);
+              lambda/(2*m) * sum(theta(2:end).^2, 1);
 
 grad = 1/m * sum(repmat((sigmoid(theta' * X')' - y), [1,size(X,2)]) .* X, 1) + [0, lambda/m * theta(2:end)'];
 

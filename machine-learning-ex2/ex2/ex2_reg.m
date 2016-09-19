@@ -89,7 +89,7 @@ fprintf('Cost at initial theta (zeros): %f\n', cost);
 initial_theta = zeros(size(X, 2), 1);
 
 % Set regularization parameter lambda to 1 (you should vary this)
-lambda = 100;
+lambda = 10;
 
 % Set Options
 options = optimset('GradObj', 'on', 'MaxIter', 400);
